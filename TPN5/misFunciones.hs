@@ -118,3 +118,100 @@ entreLineas a b c = a ++ "\n" ++ b  ++ "\n" ++ c ++ "\n"
 duplicar :: String -> Integer -> String
 duplicar _ 0 = "\n"
 duplicar s n = s ++ " " ++ duplicar s (n-1)
+
+-----------------------------------------------------------------------------------------
+-- Ejercicio 16
+
+hacerEspacios :: Int -> String
+hacerEspacios 0 = ""
+hacerEspacios n = " " ++ hacerEspacios(n-1)
+
+-----------------------------------------------------------------------------------------
+-- Ejercicio 17
+
+factorialTable :: Integer -> Integer -> String
+factorialTable m n
+                |n < 0 || m < 0 = "ERROR: m y n deben ser positivos. "
+                |n < m = "ERROR: No se puede n < m"
+                |otherwise = tituloTabla ++ cuerpoTabla
+                where
+                    tituloTabla = " n\t| n! \n------------------\n"
+                    cuerpoTabla = unlines [show x ++ "\t| " ++ show (factorial x) | x <- [m..n]]
+
+-- unlines, toma una lista de strings y las une con un salto de línea.
+-- show, convierte los números Int a String para poder concatenarlos
+-- [m .. n], es una lista de compresión.
+
+-----------------------------------------------------------------------------------------
+-- Ejercicio 18
+
+justificarCentro :: Int -> String -> String
+justificarCentro n st
+                    | n < 0 = "ERROR: Debe ser n >= 0. \n"
+                    | n < length st = "ERROR: Debe ser n >= longitud st. \n"
+                    |otherwise = salidaCentro ++ "\n"
+                    where 
+                        cantidad = div (n - length st) 2
+                        salidaCentro = hacerEspacios cantidad ++ st ++ hacerEspacios cantidad
+
+-----------------------------------------------------------------------------------------
+-- Ejercicio 19
+
+minMax2Arg :: (Int, Int) -> (Int, Int)
+minMax2Arg (x, y)
+            | x <= y = (x,y)
+            |otherwise = (y,x)
+
+minMax3Arg :: (Int, Int, Int) -> (Int, Int)
+minMax3Arg (x, y, z) = (min x (min y z),max x (max y z))
+
+minMax4Arg :: (Int, Int, Int, Int) -> (Int, Int)
+minMax4Arg (w, x, y, z) = (minimum lista, maximum lista)
+            where 
+                lista = [w,x,y,z]
+
+-----------------------------------------------------------------------------------------
+-- Ejercicio 20
+
+maxOcurr :: Int -> Int -> (Int, Int)
+maxOcurr x y 
+            | x > y = (x, 1)
+            | x < y = (y, 1)
+            |otherwise = (x, 2)
+
+--maxOcurr3Arg :: Int -> Int -> Int (Int, Int)
+--maxOcurr3Arg x y z
+                
+-----------------------------------------------------------------------------------------
+-- Ejercicio 21
+
+ordenTriple :: (Int, Int, Int) -> (Int, Int, Int)
+ordenTriple (x, y, z)
+                | x <= y && y <= z = (x, y, z)
+                | x <= z && z <= y = (x, z, y)
+                | y <= x && x <= z = (y, x, z)
+                | y <= z && z <= x = (y, z, x)
+                | z <= x && x <= y = (z, x, y)
+                | z <= y && y <= x = (z, y, x) 
+
+ordenTriple2 :: (Int, Int, Int) -> (Int, Int, Int)
+ordenTriple2 (x, y, z) = (minimo, medio, maximo)
+        where 
+            minimo = min (min x y) z
+            maximo = max (max x y) z
+            medio = (x + y + z) - minimo - maximo
+            
+-----------------------------------------------------------------------------------------
+-- Ejercicio 22
+-----------------------------------------------------------------------------------------
+-- Ejercicio 23
+-----------------------------------------------------------------------------------------
+-- Ejercicio 24
+-----------------------------------------------------------------------------------------
+-- Ejercicio 25
+-----------------------------------------------------------------------------------------
+-- Ejercicio 26
+-----------------------------------------------------------------------------------------
+-- Ejercicio 27
+-----------------------------------------------------------------------------------------
+-- Ejercicio 28
