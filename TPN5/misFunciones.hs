@@ -252,16 +252,19 @@ myMaximum (x:xs) = max x (myMaximum xs)
 
 -----------------------------------------------------------------------------------------
 -- Ejercicio 24
--- 1° Convertir el numero a String.
--- 2° Separar el numero. 
--- 3° Usar la funcion Duplicar
--- 4° Concatenar los Strings
 
---repeticionDigitos :: Int -> String
---repeticionDigitos x = show x
-
--- show para pasar de int a string
-
+repetirDigitos :: Int -> String
+repetirDigitos n
+    |n<0 = "ERROR DE DATO."
+    |otherwise = generarCad n
+      where
+        generarCad x
+          | x <= 0 = ""
+          |otherwise = generarCad (div x 10) ++ repetirN (mod x 10) (mod x 10) ++ "\n"
+      
+        repetirN k veces
+          | veces <= 0  = ""
+          | otherwise = show k ++ repetirN k (veces-1)
 -----------------------------------------------------------------------------------------
 -- Ejercicio 25
 
@@ -304,8 +307,13 @@ multiplosTripla (a, b, c)
 -----------------------------------------------------------------------------------------
 -- Ejercicio 28
 
-
 intCuadradosPerfectos :: (Int, Int) -> String
-intCuadradosPerfectos (m,n)
-        | n < m = ""
-        -- CP = Cuadrado Perfecto
+intCuadradosPerfectos (m,n) = generarCad (m,n) 1
+        where 
+          generarCad (m, n) i
+            | n < m = "" 
+            |otherwise = esCP m i ++ generarCad (m+1, n) (i+1)
+          esCP x i
+            | x >= 0 && (raiz x * raiz x) == x = show x ++ " " ++ show i ++ "\n"
+            |otherwise = ""
+          raiz x = round(sqrt(fromIntegral x))
